@@ -109,3 +109,4 @@ while True:
         time.sleep(REFRESH_RATE)
     except IOError:
         print('No i2c Chip Found!')
+        exit(0)
