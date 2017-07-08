@@ -63,46 +63,49 @@ os.system(PNGVIEWPATH + "/pngview -b 0 -l 299999 -x 650 -y 10 " + ICONPATH + "/b
 
 while True:
 
-    ret1 = readVoltage()
-    time.sleep(.4)
-    ret2 = readVoltage()
-    time.sleep(.4)
-    ret3 = readVoltage()
-    time.sleep(.4)
-    ret4 = (ret1 + ret2 + ret3) / 3
-    ret = convertVoltage(ret4)
-    if debug == 1:
-        print(ret)
-    if ret < VOLT0:
-        if status != 0:
-            changeicon("0")
-            if CLIPS == 1:
-                os.system("/usr/bin/omxplayer --no-osd --layer 999999  " + ICONPATH + "/lowbattshutdown.mp4 --alpha 160;")
-                voltcheck = readVoltage()
-                if voltcheck <= VOLT0:
-                    os.system("sudo shutdown -h now")
-                else:
-                    warning = 0
-        status = 0
-    elif ret < VOLT25:
-        if status != 25:
-            changeicon("25")
-            if warning != 1:
+    try:
+        ret1 = readVoltage()
+        time.sleep(.4)
+        ret2 = readVoltage()
+        time.sleep(.4)
+        ret3 = readVoltage()
+        time.sleep(.4)
+        ret4 = (ret1 + ret2 + ret3) / 3
+        ret = convertVoltage(ret4)
+        if debug == 1:
+            print(ret)
+        if ret < VOLT0:
+            if status != 0:
+                changeicon("0")
                 if CLIPS == 1:
-                    os.system("/usr/bin/omxplayer --no-osd --layer 999999  " + ICONPATH + "/lowbattalert.mp4 --alpha 160")
-                warning = 1
-        status = 25
-    elif ret < VOLT50:
-        if status != 50:
-            changeicon("50")
-        status = 50
-    elif ret < VOLT75:
-        if status != 75:
-            changeicon("75")
-        status = 75
-    else:
-        if status != 100:
-            changeicon("100")
-        status = 100
+                    os.system("/usr/bin/omxplayer --no-osd --layer 999999  " + ICONPATH + "/lowbattshutdown.mp4 --alpha 160;")
+                    voltcheck = readVoltage()
+                    if voltcheck <= VOLT0:
+                        os.system("sudo shutdown -h now")
+                    else:
+                        warning = 0
+            status = 0
+        elif ret < VOLT25:
+            if status != 25:
+                changeicon("25")
+                if warning != 1:
+                    if CLIPS == 1:
+                        os.system("/usr/bin/omxplayer --no-osd --layer 999999  " + ICONPATH + "/lowbattalert.mp4 --alpha 160")
+                    warning = 1
+            status = 25
+        elif ret < VOLT50:
+            if status != 50:
+                changeicon("50")
+            status = 50
+        elif ret < VOLT75:
+            if status != 75:
+                changeicon("75")
+            status = 75
+        else:
+            if status != 100:
+                changeicon("100")
+            status = 100
 
-    time.sleep(REFRESH_RATE)
+        time.sleep(REFRESH_RATE)
+    except IOError:
+        print('No i2c Chip Found!')
