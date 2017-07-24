@@ -15,7 +15,7 @@ sudo chmod 755 MintyInstall.sh
 ```
 And then type:
 ```
-./MintyInstall.sh
+sudo ./MintyInstall.sh
 ```
 Finally reboot to have it all start on boot with:
 ```
