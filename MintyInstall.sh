@@ -20,3 +20,12 @@ if ! grep '^dtparam=i2c_arm=on' $config_txt; then
 else
   echo "i2c already enabled."
 fi
+
+etc_modules=/etc/modules
+echo "Adding entries to $etc_modules..."
+if ! grep '^i2c-bcm2708' $etc_modules; then
+  echo 'i2c-bcm2708' >> $etc_modules
+  echo 'i2c-dev' >> $etc_modules
+else
+  echo "$etc_modules already set up."
+fi
