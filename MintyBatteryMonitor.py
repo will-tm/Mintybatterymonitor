@@ -53,7 +53,7 @@ def convertVoltage(sensorValue):
 
 # Initial Setup
 
-time.sleep(10)
+time.sleep(27)
 signal.signal(signal.SIGTERM, endProcess)
 signal.signal(signal.SIGINT, endProcess)
 
