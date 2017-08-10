@@ -17,7 +17,7 @@ sudo sed -i '/\"exit 0\"/!s/exit 0/\/home\/pi\/Mintybatterymonitor\/MintyStart.s
 config_txt=/boot/config.txt
 echo "Enabling i2c..."
 if ! grep '^dtparam=i2c_arm=on' $config_txt; then
-  echo 'dtparam=i2c_arm=on' >> $config_txt
+  sudo echo 'dtparam=i2c_arm=on' >> $config_txt
 else
   echo "i2c already enabled."
 fi
@@ -25,8 +25,8 @@ fi
 etc_modules=/etc/modules
 echo "Adding entries to $etc_modules..."
 if ! grep '^i2c-bcm2708' $etc_modules; then
-  echo 'i2c-bcm2708' >> $etc_modules
-  echo 'i2c-dev' >> $etc_modules
+  sudo echo 'i2c-bcm2708' >> $etc_modules
+  sudo echo 'i2c-dev' >> $etc_modules
 else
   echo "$etc_modules already set up."
 fi
