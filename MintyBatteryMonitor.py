@@ -18,7 +18,7 @@ VOLT100 = 4.09  # 4.09
 VOLT75 = 3.68   # 3.76
 VOLT50 = 3.46   # 3.63
 VOLT25 = 3.30    # 3.5
-VOLT0 = 2.96     # 3.2
+VOLT0 = 3.10     # 3.2
 adc = Adafruit_ADS1x15.ADS1015()
 GAIN = 1
 
@@ -80,7 +80,8 @@ while True:
                 if CLIPS == 1:
                     os.system("/usr/bin/omxplayer --no-osd --layer 999999  " + ICONPATH + "/lowbattshutdown.mp4 --alpha 160;")
                     voltcheck = readVoltage()
-                    if voltcheck <= VOLT0:
+                    convertFinal = convertVoltage(voltcheck)
+                    if convertFinal <= VOLT0:
                         os.system("sudo shutdown -h now")
                     else:
                         warning = 0
