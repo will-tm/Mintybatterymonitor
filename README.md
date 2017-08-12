@@ -11,6 +11,10 @@ wget https://raw.githubusercontent.com/HoolyHoo/Mintybatterymonitor/master/Minty
 ```
 Then type:
 ```
+sudo git clone https://github.com/HoolyHoo/Mintybatterymonitor.git
+```
+Then type:
+```
 sudo chmod 777 MintyInstall.sh
 ```
 And then type:
