@@ -11,11 +11,11 @@ wget https://raw.githubusercontent.com/HoolyHoo/Mintybatterymonitor/master/Minty
 ```
 Then type:
 ```
-sudo chmod 755 MintyInstall.sh
+sudo chmod 777 MintyInstall.sh
 ```
 And then type:
 ```
-sudo ./MintyInstall.sh
+./MintyInstall.sh
 ```
 Finally reboot to have it all start on boot with:
 ```
