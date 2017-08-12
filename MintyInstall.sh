@@ -9,7 +9,7 @@ sudo apt-get install -y i2c-tools -y
 sudo apt-get install build-essential python-dev python-smbus python-pip -y
 sudo pip install adafruit-ads1x15
 cd ~
-sudo git clone https://github.com/HoolyHoo/Mintybatterymonitor.git
+sudo git clone git@github.com:HoolyHoo/Mintybatterymonitor.git .
 sudo chmod 755 /home/pi/Mintybatterymonitor/Pngview/pngview
 sudo chmod 755 /home/pi/Mintybatterymonitor/MintyStart.sh
 sudo sed -i '/\"exit 0\"/!s/exit 0/\/home\/pi\/Mintybatterymonitor\/MintyStart.sh \&\nexit 0/g' /etc/rc.local
