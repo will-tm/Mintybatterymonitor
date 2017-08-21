@@ -5,7 +5,16 @@ import os
 import time
 
 
-state = 1
+toggleFile = '/home/pi/Mintybatterymonitor/Toggle.txt'
+
+try:
+    with open(toggleFile, 'r') as f:
+        output = f.read()
+except IOError:
+    with open(toggleFile, 'w') as f:
+        f.write('1')
+    output = '1'
+state = int(output)
 
 
 def shutdown():
@@ -17,12 +26,19 @@ def togglestate():
     if state == 1:
         os.system('sudo pkill -f "python /home/pi/Mintybatterymonitor/MintyBatteryMonitor.py"')
         state = 0
-        time.sleep(5)
-
-    else:
+        with open(toggleFile, 'w') as f:
+            f.write('0')
+        time.sleep(2)
         os.system("python /home/pi/Mintybatterymonitor/MintyBatteryMonitor.py &")
+        time.sleep(1)
+    else:
+        os.system('sudo pkill -f "python /home/pi/Mintybatterymonitor/MintyBatteryMonitor.py"')
         state = 1
-        time.sleep(5)
+        with open(toggleFile, 'w') as f:
+            f.write('1')
+        time.sleep(2)
+        os.system("python /home/pi/Mintybatterymonitor/MintyBatteryMonitor.py &")
+        time.sleep(1)
 
 
 shutdown_btn = Button(7, hold_time=1)
