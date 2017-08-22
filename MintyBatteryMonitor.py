@@ -88,12 +88,7 @@ if state == 1:
                     changeicon("0")
                     if CLIPS == 1:
                         os.system("/usr/bin/omxplayer --no-osd --layer 999999  " + ICONPATH + "/lowbattshutdown.mp4 --alpha 160;")
-                        voltcheck = readVoltage()
-                        convertFinal = convertVoltage(voltcheck)
-                        if convertFinal <= VOLT75:
-                            os.system("sudo shutdown -h now")
-                        else:
-                            warning = 0
+                        os.system("sudo shutdown -h now")
                 status = 0
             elif ret < VOLT25:
                 if status != 25:
@@ -139,13 +134,8 @@ elif state == 0:
                     changeicon("0")
                     if CLIPS == 1:
                         os.system("/usr/bin/omxplayer --no-osd --layer 999999  " + ICONPATH + "/lowbattshutdown.mp4 --alpha 160;")
-                        voltcheck = readVoltage()
-                        convertFinal = convertVoltage(voltcheck)
-                        if convertFinal <= VOLT75:
-                            os.system("sudo shutdown -h now")
-                        else:
-                            warning = 0
-                status = 0
+                        os.system("sudo shutdown -h now")
+                    status = 0
             elif ret < VOLT25:
                 if status != 25:
                     changeicon("25")
