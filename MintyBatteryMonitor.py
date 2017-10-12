@@ -1,4 +1,15 @@
-#!/usr/bin/python
+#!/usr/bin/env python2.7
+
+'''
+Date:  10/08/17
+Author:  HoolyHoo
+Version:  2.0
+Name:  Battery Monitor Script - Utility for the MintyPi project.
+Description:  Monitors analog input for voltage and displays battery icon related to the input.  Displays low warning battery video at 25% battery level and displays shutdown video at critical battery level followed by a gracefull safe shutdown.
+Usage:  Battery icons can be toggled and state remembered by using shortcut combo, "Mode + A".
+
+'''
+
 import time
 import os
 import signal
