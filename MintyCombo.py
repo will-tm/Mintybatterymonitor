@@ -14,6 +14,7 @@ Usage:  Mode + Y = Toggle Wifi with Icon
         Mode + Dpad Left  = Volume Down with Icon
         Mode + Dpad Up    = Dimming Up
         Mode + Dpad Down  = Dimming Down
+        Mode + Right Shoulder = Display Cheat
 '''
 
 from gpiozero import Button
