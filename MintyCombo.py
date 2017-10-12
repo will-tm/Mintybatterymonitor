@@ -46,6 +46,7 @@ shutdownBtn = Button(26)
 monitorBtn = Button(21)
 wifiBtn = Button(20)
 bluetoothBtn = Button(16)
+cheatBtn = Button(6)
 led = 1
 brightness = 1024
 volume = 100
@@ -173,6 +174,12 @@ def controlBrightness():
     time.sleep(.2)
 
 
+def showCheat():
+    os.system(pngviewPath + "/pngview2 -b 0 -l 999999 " + iconPath + "/cheat.png &")
+    time.sleep(5)
+    killPngview()
+
+
 def killPngview():
     os.system("sudo killall -q -15 pngview2")
 
@@ -204,6 +211,8 @@ def checkFunction():
             wifiToggle()
         elif bluetoothBtn.is_pressed:
             bluetoothToggle()
+        elif cheatBtn.is_pressed:
+            showCheat()
 
 
 # Initial File Setup
