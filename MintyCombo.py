@@ -3,7 +3,7 @@
 '''
 Date:  10/08/17
 Author:  HoolyHoo
-Version:  2.0
+Version:  2.1
 Name:  Combo Shortcut Script - Utility for the MintyPi project.
 Description:  Monitors GPIO interrupts to adjust volume with icons, lcd dimming, battery monitor, wifi and bluetooth toggle, and performs safe shutdown.
 Usage:  Mode + Y = Toggle Wifi with Icon
@@ -25,19 +25,26 @@ import os
 import time
 
 
-def grabPin(file):
+def grabPin(file, directory):
     try:
         with open(file, 'r') as f:
             pin = f.read()
     except IOError:
-        with open(file, 'w') as f:
-            f.write('7')
-        pin = '7'
+        if not os.path.isdir(directory):
+            os.makedirs(directory)
+            with open(file, 'w') as f:
+                f.write('7')
+            pin = '7'
+        else:
+            with open(file, 'w') as f:
+                f.write('7')
+            pin = '7'
     return int(pin)
 
 
 pinFile = "/boot/mintypi/pinfile.txt"
-functionPin = grabPin(pinFile)
+pinDirectory = "/boot/mintypi/"
+functionPin = grabPin(pinFile, pinDirectory)
 functionBtn = Button(functionPin)
 brightnessUpBtn = Button(4)
 brightnessDownBtn = Button(5)
