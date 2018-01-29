@@ -11,17 +11,17 @@ warning = 0
 status = 0
 debug = 0
 iconState = ""
-toggleFile = "/home/pi/Mintybatterymonitor/Toggle.txt"
-PNGVIEWPATH = "/home/pi/Mintybatterymonitor/Pngview/"
-ICONPATH = "/home/pi/Mintybatterymonitor/icons"
+toggleFile = "/opt/Mintybatterymonitor/Toggle.txt"
+PNGVIEWPATH = "/opt/Mintybatterymonitor/Pngview/"
+ICONPATH = "/opt/Mintybatterymonitor/icons"
 CLIPS = 1
-REFRESH_RATE = 2
+REFRESH_RATE = 10
 VOLT100 = 4.09  # 4.09
 VOLT75 = 3.68   # 3.76
 VOLT50 = 3.46   # 3.63
 VOLT25 = 3.35    # 3.5
 VOLT0 = 3.25     # 3.2
-adc = Adafruit_ADS1x15.ADS1015()
+adc = Adafruit_ADS1x15.ADS1015(address=0x48, busnum=3)
 GAIN = 1
 
 
@@ -31,18 +31,18 @@ def changeicon(percent):
         iconsState = percent
         i = 0
         killid = 0
-        os.system(PNGVIEWPATH + "/pngview -b 0 -l 3000" + percent + " -x 650 -y 10 " + ICONPATH + "/battery" + percent + ".png &")
+        os.system(PNGVIEWPATH + "/pngview -b 0 -l 3000" + percent + " -x 300 -y 8 " + ICONPATH + "/battery" + percent + ".png &")
         out = check_output("ps aux | grep pngview | awk '{ print $2 }'", shell=True)
         nums = out.split('\n')
         for num in nums:
             i += 1
             if i == 1:
                 killid = num
-                os.system("sudo kill " + killid)
+                os.system("kill " + killid)
 
 
 def endProcess(signalnum=None, handler=None):
-    os.system("sudo killall pngview")
+    os.system("killall pngview")
     exit(0)
 
 
@@ -64,7 +64,7 @@ signal.signal(signal.SIGINT, endProcess)
 
 # Begin Battery Monitoring
 
-os.system(PNGVIEWPATH + "/pngview -b 0 -l 299999 -x 650 -y 10 " + ICONPATH + "/blank.png &")
+os.system(PNGVIEWPATH + "/pngview -b 0 -l 299999 -x 300 -y 8 " + ICONPATH + "/blank.png &")
 try:
     with open(toggleFile, 'r') as f:
         output = f.read()
@@ -92,7 +92,7 @@ if state == 1:
                     changeicon("0")
                     if CLIPS == 1:
                         os.system("/usr/bin/omxplayer --no-osd --layer 999999  " + ICONPATH + "/lowbattshutdown.mp4 --alpha 160;")
-                        os.system("sudo shutdown -h now")
+                        os.system("shutdown -h now")
                 status = 0
             elif ret < VOLT25:
                 if status != 25:
@@ -138,7 +138,7 @@ elif state == 0:
                     changeicon("0")
                     if CLIPS == 1:
                         os.system("/usr/bin/omxplayer --no-osd --layer 999999  " + ICONPATH + "/lowbattshutdown.mp4 --alpha 160;")
-                        os.system("sudo shutdown -h now")
+                        os.system("shutdown -h now")
                     status = 0
             elif ret < VOLT25:
                 if status != 25:
