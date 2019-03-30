@@ -13,11 +13,11 @@ http://www.sudomod.com/forum/viewtopic.php?f=38&t=3699
 Go to raspberry command prompt or SSH.
 Make sure you are in the home directory by typing ```cd ~ ``` and then type:
 ```
-wget https://raw.githubusercontent.com/HoolyHoo/Mintybatterymonitor/master/MintyInstall.sh
+wget https://raw.githubusercontent.com/Will-tm/Mintybatterymonitor/master/MintyInstall.sh
 ```
 Then type:
 ```
-sudo git clone https://github.com/HoolyHoo/Mintybatterymonitor.git
+sudo git clone https://github.com/Will-tm/Mintybatterymonitor.git
 ```
 Then type:
 ```
